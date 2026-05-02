@@ -63,9 +63,11 @@ if st.button(st.session_state.button_text, key="sim_controller"):
     if st.session_state.button_text == "Start Simulation":
         st.session_state.button_text = "Stop Simulation"
         simulation_started = True
+        m.simulation = simulation_started
     else:
         st.session_state.button_text = "Start Simulation"
         simulation_started = False
+        m.simulation = simulation_started
     
     if(simulation_started == True):
 
@@ -101,5 +103,6 @@ if st.button(st.session_state.button_text, key="sim_controller"):
         m.market_maker = market_maker_qty
         m.whale = whale_qty
         m.noise_trader = noise_trader_qty
-        m.trend_follower = trend_follower_qty   
+        m.trend_follower = trend_follower_qty
+        m.run_simulation()   
         st.rerun()
