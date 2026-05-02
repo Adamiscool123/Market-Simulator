@@ -1,4 +1,7 @@
 import streamlit as st
+import Variable
+
+m = Variable.Variables()
 
 # 1. Make the label big using simple Markdown (no CSS needed)
 st.markdown("## **Aggressiveness**")
@@ -94,4 +97,9 @@ if st.button(st.session_state.button_text, key="sim_controller"):
                 st.error("Please enter a valid number for the Whale!")
                 error = True
     if(error == False):
+        m.agg = aggressiveness
+        m.market_maker = market_maker_qty
+        m.whale = whale_qty
+        m.noise_trader = noise_trader_qty
+        m.trend_follower = trend_follower_qty   
         st.rerun()
