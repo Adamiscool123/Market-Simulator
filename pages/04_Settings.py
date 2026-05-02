@@ -52,10 +52,46 @@ if "button_text" not in st.session_state:
 # 3. Use a unique 'key' so Streamlit can track this specific widget 
 # even when the label text changes.
 if st.button(st.session_state.button_text, key="sim_controller"):
+    error = False
+
+    simulation_started = False
+
     # Toggle the logic
     if st.session_state.button_text == "Start Simulation":
         st.session_state.button_text = "Stop Simulation"
+        simulation_started = True
     else:
         st.session_state.button_text = "Start Simulation"
+        simulation_started = False
     
-    st.rerun()
+    if(simulation_started == True):
+
+        if whale_qty:
+            try:
+                whale_qty = int(whale_qty)
+            except ValueError:
+                st.error("Please enter a valid number for the Whale!")
+                error = True
+
+        if market_maker_qty:
+            try:
+                market_maker_qty = int(market_maker_qty)
+            except ValueError:
+                st.error("Please enter a valid number for the Whale!")
+                error = True
+        
+        if noise_trader_qty:
+            try:
+                noise_trader_qty = int(noise_trader_qty)
+            except ValueError:
+                st.error("Please enter a valid number for the Whale!")
+                error = True
+
+        if trend_follower_qty:
+            try:
+                trend_follower_qty = int(trend_follower_qty)
+            except ValueError:
+                st.error("Please enter a valid number for the Whale!")
+                error = True
+    if(error == False):
+        st.rerun()
