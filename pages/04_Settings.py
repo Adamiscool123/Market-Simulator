@@ -1,7 +1,9 @@
 import streamlit as st
+import orderbook_wrapper as lib
 import Variable
 
 m = Variable.Variables()
+market = lib.GlobalVariables()
 
 # 1. Make the label big using simple Markdown (no CSS needed)
 st.markdown("## **Aggressiveness**")
@@ -104,5 +106,5 @@ if st.button(st.session_state.button_text, key="sim_controller"):
         m.whale = whale_qty
         m.noise_trader = noise_trader_qty
         m.trend_follower = trend_follower_qty
-        m.run_simulation()   
+        m.run_simulation(market)   
         st.rerun()

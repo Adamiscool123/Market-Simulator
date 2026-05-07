@@ -8,20 +8,21 @@ class Variables:
         self.market_maker = 0
         self.noise_trader = 0
         self.trend_follower = 0
+        self.variable = 0
         self.simulation = False
     
-    def run_simulation(self):
+    def run_simulation(self, market):
         if(self.simulation == False):
             return 0
+        
 
-        market = lib.GlobalVariables()
-        engine = lib.Matching_Engine()
-        agents = lib.Agents()
+        self.variable = market
+        engine = lib.Matching_Engine(market)
 
-        whale_agent = agents.whale(market)
-        market_maker = agents.market_maker(market)
-        noise_trader = agents.noise_trader(market)
-        trend_follower = agents.trend_follower(market)
+        whale_agent = lib.whale(market)
+        market_maker = lib.market_maker(market)
+        noise_trader = lib.noise_trader(market)
+        trend_follower = lib.trend_follower(market)
 
         while(self.simulation == True):
             for i in range(1, self.whale):
@@ -42,7 +43,7 @@ class Variables:
     
     def print_book(self):
         if(self.simulation == True):
-            m = lib.Global_Variables()
+            m = self.variable
 
             if m.sellMap.empty() and m.buyMap.empty():
                 st.text("")
