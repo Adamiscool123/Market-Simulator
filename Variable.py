@@ -19,10 +19,10 @@ class Variables:
         self.variable = market
         engine = lib.Matching_Engine()
 
-        whale_agent = lib.whale(market)
-        market_maker = lib.market_maker(market)
-        noise_trader = lib.noise_trader(market)
-        trend_follower = lib.trend_follower(market)
+        whale_agent = lib.Whale(market)
+        market_maker = lib.MarketMaker(market)
+        noise_trader = lib.NoiseTrader(market)
+        trend_follower = lib.TrendFollower(market)
 
         for i in range(self.whale):
             whale_agent.execute_agent()
