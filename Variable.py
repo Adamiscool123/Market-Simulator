@@ -41,32 +41,38 @@ class Variables:
             engine.checker(market)
     
     def print_book(self):
-        if(self.simulation == True):
-            m = self.variable
+        if self.simulation == False:
+            st.warning("Simulation is not running.")
+            return
 
-            if m.sellMap.empty() and m.buyMap.empty():
-                st.text("")
-            
-            st.title("Order Book")
+        m = self.variable
 
-            for [price, level] in m.sellMap:
-                total_shares = 0
+        if m == 0:
+            st.warning("No market data yet.")
+            return
 
-                for order in level.orders:
-                    total_shares += order.shares
+        if not m.sellMap and not m.buyMap:
+            st.info("Order book is empty.")
+            return
 
-                if total_shares > 0:
-                    st.text(f"SELL:   $ {price} | {total_shares}")
-                
+        st.title("Order Book")
 
-            st.text("--------------------------------------")
+        for price, level in m.sellMap.items():
+            total_shares = 0
 
-            for [price, level] in m.buyMap:
-                total_shares = 0
+            for order in level.orders:
+                total_shares += order.shares
 
-                for order in level.orders:
-                    total_shares += order.shares
+            if total_shares > 0:
+                st.text(f"SELL:   $ {price} | {total_shares}")
 
+        st.text("--------------------------------------")
 
-                if total_shares > 0:
-                    st.text(f"BUY:   $ {price} | {total_shares}")
+        for price, level in m.buyMap.items():
+            total_shares = 0
+
+            for order in level.orders:
+                total_shares += order.shares
+
+            if total_shares > 0:
+                st.text(f"BUY:   $ {price} | {total_shares}")
