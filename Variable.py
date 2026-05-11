@@ -17,28 +17,28 @@ class Variables:
             return 0
 
         self.variable = market
-        engine = lib.Matching_Engine(market)
+        engine = lib.Matching_Engine()
 
         whale_agent = lib.whale(market)
         market_maker = lib.market_maker(market)
         noise_trader = lib.noise_trader(market)
         trend_follower = lib.trend_follower(market)
 
-        for i in range(1, self.whale):
+        for i in range(self.whale):
             whale_agent.execute_agent()
-            engine.checker()
+            engine.checker(market)
 
-        for i in range(1, self.market_maker):
+        for i in range(self.market_maker):
             market_maker.execute_agent()
-            engine.checker()
+            engine.checker(market)
 
-        for i in range(1, self.noise_trader):
+        for i in range(self.noise_trader):
             noise_trader.execute_agent()
-            engine.checker()
+            engine.checker(market)
 
-        for i in range(1, self.trend_follower):
+        for i in range(self.trend_follower):
             trend_follower.execute_agent()
-            engine.checker()
+            engine.checker(market)
     
     def print_book(self):
         if(self.simulation == True):

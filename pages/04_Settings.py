@@ -2,12 +2,13 @@ import streamlit as st
 import orderbook_wrapper as lib
 import Variable
 
-st.session_state.variables = Variable.Variables()
+if "variables" not in st.session_state:
+    st.session_state.variables = Variable.Variables()
+
+if "market" not in st.session_state:
+    st.session_state.market = lib.GlobalVariables()
 
 m = st.session_state.variables
-
-st.session_state.market = lib.GlobalVariables()
-
 market = st.session_state.market
 
 # 1. Make the label big using simple Markdown (no CSS needed)
@@ -30,28 +31,28 @@ st.title("")
 
 st.markdown("### **Whale**")
 
-whale_qty = st.number_input(label="Qty: ", key=1)
+whale_qty = st.number_input(label="Qty: ", key=1, min_value=0, max_value=10, step=1)
 
 
 st.title("")
 
 st.markdown("### **Market Maker**")
 
-market_maker_qty = st.number_input(label="Qty: ", key=2)
+market_maker_qty = st.number_input(label="Qty: ", key=2, min_value=0, max_value=10, step=1)
 
 
 st.title("")
 
 st.markdown("### **Noisy Trader**")
 
-noise_trader_qty = st.number_input(label="Qty: ", key=3)
+noise_trader_qty = st.number_input(label="Qty: ", key=3, min_value=0, max_value=10, step=1)
 
 
 st.title("")
 
 st.markdown("### **Trend Follower**")
 
-trend_follower_qty = st.number_input(label="Qty: ", key=4)
+trend_follower_qty = st.number_input(label="Qty: ", key=4, min_value=0, max_value=10, step=1)
 
 
 st.title("")
