@@ -1,5 +1,6 @@
-import Variable 
+import Variable
+import streamlit as st
 
-v = Variable.Variables() 
+v = st.session_state.variables
 
 v.print_book()

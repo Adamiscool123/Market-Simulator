@@ -2,8 +2,13 @@ import streamlit as st
 import orderbook_wrapper as lib
 import Variable
 
-m = Variable.Variables()
-market = lib.GlobalVariables()
+st.session_state.variables = Variable.Variables()
+
+m = st.session_state.variables
+
+st.session_state.market = lib.GlobalVariables()
+
+market = st.session_state.market
 
 # 1. Make the label big using simple Markdown (no CSS needed)
 st.markdown("## **Aggressiveness**")
@@ -25,28 +30,28 @@ st.title("")
 
 st.markdown("### **Whale**")
 
-whale_qty = st.text_input(label="Qty: ", key=1)
+whale_qty = st.number_input(label="Qty: ", key=1)
 
 
 st.title("")
 
 st.markdown("### **Market Maker**")
 
-market_maker_qty = st.text_input(label="Qty: ", key=2)
+market_maker_qty = st.number_input(label="Qty: ", key=2)
 
 
 st.title("")
 
 st.markdown("### **Noisy Trader**")
 
-noise_trader_qty = st.text_input(label="Qty: ", key=3)
+noise_trader_qty = st.number_input(label="Qty: ", key=3)
 
 
 st.title("")
 
 st.markdown("### **Trend Follower**")
 
-trend_follower_qty = st.text_input(label="Qty: ", key=4)
+trend_follower_qty = st.number_input(label="Qty: ", key=4)
 
 
 st.title("")
@@ -75,28 +80,28 @@ if st.button(st.session_state.button_text, key="sim_controller"):
 
         if whale_qty:
             try:
-                whale_qty = int(whale_qty)
+                whale_qty = whale_qty
             except ValueError:
                 st.error("Please enter a valid number for the Whale!")
                 error = True
 
         if market_maker_qty:
             try:
-                market_maker_qty = int(market_maker_qty)
+                market_maker_qty = market_maker_qty
             except ValueError:
                 st.error("Please enter a valid number for the Whale!")
                 error = True
         
         if noise_trader_qty:
             try:
-                noise_trader_qty = int(noise_trader_qty)
+                noise_trader_qty = noise_trader_qty
             except ValueError:
                 st.error("Please enter a valid number for the Whale!")
                 error = True
 
         if trend_follower_qty:
             try:
-                trend_follower_qty = int(trend_follower_qty)
+                trend_follower_qty = trend_follower_qty
             except ValueError:
                 st.error("Please enter a valid number for the Whale!")
                 error = True
