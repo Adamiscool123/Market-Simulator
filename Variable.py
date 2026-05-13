@@ -44,6 +44,11 @@ class Variables:
         if self.simulation == False:
             st.warning("Simulation is not running.")
             return
+        
+        st.write("Sell levels:", list(m.sellMap.keys()))
+        st.write("Buy levels:", list(m.buyMap.keys()))
+        st.write("Price history length:", len(m.price_history))
+        st.write("Last prices:", m.price_history[-10:])
 
         m = self.variable
 
